@@ -1,13 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>出席管理システム</title>
-</head>
-<body>
-    <h1>出欠管理システム開発スタート</h1>
+<html lang="ja">
 
-    <script src = "script.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>出欠管理システム</title>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+
+<body>
+
+  <div id="home-screen" class="screen">
+    <h2>メニュー</h2>
+    <div class="menu-buttons">
+      <button class="menu-btn" onclick="changeScreen('attendance-screen')">出欠管理へ</button>
+      <button class="menu-btn" onclick="changeScreen('register-screen')">名前登録へ</button>
+    </div>
+  </div>
+
+  <div id="attendance-screen" class="screen" style="display: none;">
+    <button class="back-btn" onclick="changeScreen('home-screen')">◀ ホームに戻る</button>
+    
+    <div class="date-selector">
+      <select id="activity-date">
+        <option value="2026-04-10">2026年4月10日 (金)</option>
+        <option value="2026-04-11">2026年4月11日 (土)</option>
+      </select>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-student" onclick="switchTab('student')">生徒</button>
+      <button class="tab-btn" id="tab-supporter" onclick="switchTab('supporter')">サポーター</button>
+    </div>
+
+    <div class="attendance-area">
+      <div class="list-box">
+        <h3 class="list-header">未出席 (タップで移動)</h3>
+        <ul class="list-content" id="absent-list">
+          </ul>
+      </div>
+
+      <div class="list-box">
+        <h3 class="list-header">出席者</h3>
+        <ul class="list-content" id="present-list">
+          </ul>
+      </div>
+    </div>
+
+    <button id="submit-btn" onclick="submitData()">決定</button>
+  </div>
+
+  <div id="register-screen" class="screen" style="display: none;">
+    <button class="back-btn" onclick="changeScreen('home-screen')">◀ ホームに戻る</button>
+    
+    <h2>新規メンバー登録</h2>
+    <div class="form-group">
+      <label>名前</label>
+      <input type="text" placeholder="名前を入力">
+    </div>
+    <div class="form-group">
+      <label>学年</label>
+      <input type="text" placeholder="学年を入力">
+    </div>
+    <div class="form-group">
+      <label>生徒かサポータ</label>
+      <select>
+        <option>生徒</option>
+        <option>サポータ</option>
+      </select>
+    </div>
+    <button id="submit-btn" onclick="submitData()">決定</button>
+  </div>
+
+  <div id="toast">更新を確定しました✅</div>
+
+  <script src="script.js"></script>
 </body>
 </html>

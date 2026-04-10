@@ -1,0 +1,209 @@
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 15px;
+  color: #333;
+}
+
+/* 画面遷移と新しい画面のスタイル */
+.screen {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.menu-btn {
+  padding: 20px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  padding: 0;
+  font-weight: bold;
+}
+
+/* フォームのスタイル */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* 日付選択エリア */
+.date-selector {
+  margin-bottom: 15px;
+}
+select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* タブ切り替えエリア */
+.tabs {
+  display: flex;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #007bff;
+}
+.tab-btn {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  background: #fff;
+  color: #007bff;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.tab-btn.active {
+  background: #007bff;
+  color: #fff;
+}
+
+/* 左右のリストエリア */
+.attendance-area {
+  display: flex;
+  gap: 10px;
+  height: 50vh;
+}
+.list-box {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.list-header {
+  background: #e9ecef;
+  padding: 10px;
+  text-align: center;
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* ＝＝＝ ここがタイル型UIに変更された部分 ＝＝＝ */
+.list-content {
+  list-style: none;
+  padding: 15px;
+  margin: 0;
+  overflow-y: auto;
+  flex: 1;
+  
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 画面を均等に2列に分割する呪文 */
+  gap: 12px; /* タイルとタイルの隙間 */
+  align-content: start; /* 上詰めで配置 */
+}
+
+.list-item {
+  background: #ffffff;
+  border: 2px solid #e9ecef; /* 少し太めの枠線 */
+  border-radius: 12px; /* 角を少しだけ丸くする */
+  padding: 20px 10px; /* 縦に広く余白を取る（押しやすくするため） */
+  text-align: center; /* 名前をド真ん中に配置 */
+  font-size: 16px;
+  font-weight: bold;
+  color: #495057;
+  
+  /* ほんのり影をつけて、画面から浮き上がらせる */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+/* タップした「瞬間」に、物理ボタンのように下に沈むアニメーション */
+.list-item:active {
+  transform: translateY(3px); /* 下に3px移動させる */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* 影を小さくして「押し込まれた感」を出す */
+  background: #f8f9fa;
+}
+
+/* 出席者（右側）に移動したタイルだけ色を緑系に変える */
+#present-list .list-item {
+  background: #e6f4ea; /* 薄い緑 */
+  border-color: #34a853; /* はっきりした緑の枠線 */
+  color: #137333; /* 濃い緑の文字 */
+}
+/* ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */
+
+/* 決定ボタン */
+#submit-btn {
+  width: 100%;
+  padding: 15px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+/* トースト通知 */
+#toast {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 16px;
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  font-size: 15px;
+}
+#toast.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+@keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+@keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
